@@ -24,6 +24,7 @@ ___
   * [OCI Oracle Cloud Infrastructure Registry (OCIR)](#oci-oracle-cloud-infrastructure-registry-ocir)
   * [Quay.io](#quayio)
   * [DigitalOcean](#digitalocean-container-registry)
+  * [Buildkite Packages](#buildkite-package-registry)
 * [Customizing](#customizing)
   * [inputs](#inputs)
 * [Contributing](#contributing)
@@ -494,6 +495,43 @@ jobs:
           password: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 ```
 
+### Buildkite Package Registry
+
+Use your Buildkite registered email address to generate an API access token to authenticate. U
+
+```yaml
+name: ci
+
+on:
+  push:
+    branches: main
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to Buildkite Package Registry
+        uses: docker/login-action@v3
+        with:
+          registry: packages.buildkite.com
+          username: buildkite #All usernames to buildkite packages is "buildkite". 
+          password: ${{ secrets.BUILDKITE_ACCESS_TOKEN }}
+```
+**Useful references:**
+[Buildkite package Registry](https://buildkite.com/docs/package-registries)
+
+Go to your Buildkite Org/Buildkite Package registry to generate a token
+
+**Working pipeline example:** [https://gist.github.com/kleeadrian/f096878f76b5fb759976adce9550c9a5](https://gist.github.com/kleeadrian/f096878f76b5fb759976adce9550c9a5)
+
+**Scope required:**
+```
+read_registries
+write_registries
+read_packages
+write_packages
+```
 ## Customizing
 
 ### inputs
