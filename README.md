@@ -24,6 +24,7 @@ ___
   * [OCI Oracle Cloud Infrastructure Registry (OCIR)](#oci-oracle-cloud-infrastructure-registry-ocir)
   * [Quay.io](#quayio)
   * [DigitalOcean](#digitalocean-container-registry)
+  * [Fly.io](#flyio)
 * [Customizing](#customizing)
   * [inputs](#inputs)
 * [Contributing](#contributing)
@@ -492,6 +493,31 @@ jobs:
           registry: registry.digitalocean.com
           username: ${{ vars.DIGITALOCEAN_USERNAME }}
           password: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+```
+
+### Fly.io
+
+Use an [access token](https://fly.io/docs/security/tokens/) to authenticate to the
+container registry.
+
+```yaml
+name: ci
+
+on:
+  push:
+    branches: main
+
+jobs:
+  login:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Login to Fly.io Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: registry.fly.io
+          username: x
+          password: ${{ secrets.FLY_API_TOKEN }}
 ```
 
 ## Customizing
