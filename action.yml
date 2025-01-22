@@ -24,6 +24,10 @@ inputs:
     description: 'Log out from the Docker registry at the end of a job'
     default: 'true'
     required: false
+  attempts:
+    description: 'Number of attempts to try in case of server-side errors'
+    default: '1'
+    required: false
 
 runs:
   using: 'node20'

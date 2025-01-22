@@ -8,7 +8,7 @@ export async function main(): Promise<void> {
   const input: context.Inputs = context.getInputs();
   stateHelper.setRegistry(input.registry);
   stateHelper.setLogout(input.logout);
-  await docker.login(input.registry, input.username, input.password, input.ecr);
+  await docker.login(input.registry, input.username, input.password, input.ecr, input.attempts);
 }
 
 async function post(): Promise<void> {
